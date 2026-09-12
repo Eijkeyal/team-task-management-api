@@ -7,8 +7,9 @@ on:
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
     runs-on: ubuntu-latest
+
     steps:
       - name: SSH and redeploy on EC2
         uses: appleboy/ssh-action@v1
@@ -23,7 +24,8 @@ jobs:
             docker run -d \
               --name team-task-api \
               -p 3000:3000 \
-              --env-file ~/team-task-app/.env \
+              --env-file /home/ubuntu/team-task-app/.env \
               --restart unless-stopped \
               eijkeyal/team-task-management:latest
             docker image prune -f
+            echo "Deploy complete"
