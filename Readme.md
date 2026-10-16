@@ -3,7 +3,6 @@
 A RESTful backend API for managing teams, projects, and tasks with role-based access control, JWT authentication, task assignment, filtering, pagination, and real-time Socket.IO notifications.
 
 ## Features
-
 - JWT-based authentication
 - Access and refresh token authentication
 - Role-based authorization
